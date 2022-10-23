@@ -1,4 +1,4 @@
-import {Header, Button, Categories} from "./components";
+import {Header, Categories} from "./components";
 
 function App() {
   return (
