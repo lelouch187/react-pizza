@@ -1,5 +1,6 @@
 import pizzaLogo
     from "../assets/img/pizza-logo.svg";
+import Button from "./Button";
 
 
 const Header = () => {
@@ -17,8 +18,7 @@ const Header = () => {
                     </div>
                 </div>
                 <div className="header__cart">
-                    <a href="/cart.html"
-                       className="button button--cart">
+                    <Button className="button--cart">
                         <span>520 ₽</span>
                         <div
                             className="button__delimiter"></div>
@@ -52,7 +52,7 @@ const Header = () => {
                             />
                         </svg>
                         <span>3</span>
-                    </a>
+                    </Button>
                 </div>
             </div>
         </div>
