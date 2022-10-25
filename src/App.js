@@ -1,6 +1,6 @@
 import {Header, Categories, SortPopup} from "./components";
 
-function App() {
+const App = () => {
   return (
       <div className="wrapper">
         <Header />
