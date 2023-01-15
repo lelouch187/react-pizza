@@ -6,14 +6,18 @@ import Header from './components/Header';
 import Categories from './components/Categories';
 import Sort from './components/Sort';
 import PizzaBlock from './components/PizzaBlock';
+import { useFetching } from './hooks/useFetching';
+import { PostServices } from './API/PostServices';
+import Skeleton from './components/PizzaBlock/Skeleton';
 
 function App() {
   const [pizzas, setPizzas] = React.useState([]);
-
+  const [fetching, isLoading, error] = useFetching(async () => {
+    const response = await PostServices.getAll();
+    setPizzas(response);
+  });
   React.useEffect(() => {
-    fetch('https://63c4516ef0028bf85fa6b200.mockapi.io/pizzas')
-      .then((response) => response.json())
-      .then((items) => setPizzas(items));
+    fetching(); // eslint-disable-next-line
   }, []);
 
   return (
@@ -27,9 +31,14 @@ function App() {
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
-            {pizzas.map((pizzaObj) => {
-              return <PizzaBlock key={pizzaObj.id} {...pizzaObj} />;
-            })}
+            {error
+              ? 'Что-то пошло не так ...'
+              : isLoading
+              ? [...new Array(6)].map((_, i) => {
+              return <Skeleton key={i} />})
+              : pizzas.map((pizzaObj) => {
+                  return <PizzaBlock key={pizzaObj.id} {...pizzaObj} />;
+                })}
           </div>
         </div>
       </div>
