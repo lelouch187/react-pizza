@@ -1,15 +1,14 @@
 import React from 'react';
+import { PizzasContext } from '../context';
 
 const Sort = () => {
   const [visible, setVisible] = React.useState(false);
-  const [activeCategories, setActiveCategories] = React.useState(0)
-  const sortCategories = ['популярности','цене','алфавиту']
+  const { sortCategories, activeCategories, setActiveCategories} = React.useContext(PizzasContext)
 
   const onChangeCategories = (index) => {
-    setActiveCategories(index)
-    setVisible(false)
-  }
-
+    setActiveCategories(index);
+    setVisible(false);
+  };
   return (
     <div className="sort">
       <div className="sort__label">
@@ -26,7 +25,7 @@ const Sort = () => {
         </svg>
         <b>Сортировка по:</b>
         <span onClick={()=>setVisible(!visible)}
-        >{sortCategories[activeCategories]}</span>
+        >{sortCategories[activeCategories].name}</span>
       </div>
       {visible && (
         <div className="sort__popup">
@@ -34,8 +33,8 @@ const Sort = () => {
             {
               sortCategories.map((categories,i)=>{
               return <li onClick={()=>onChangeCategories(i)}
-              key={categories}
-              className={activeCategories===i?"active":''}>{categories}</li>
+              key={categories.name}
+              className={activeCategories===i?"active":''}>{categories.name}</li>
               })
             }
           </ul>

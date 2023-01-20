@@ -4,22 +4,13 @@ import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
+import { PizzasContext } from '../context';
 
-import { useFetching } from '../hooks/useFetching';
-import { PostServices } from '../API/PostServices';
+
 
 export const Home = () => {
-  const [pizzas, setPizzas] = React.useState([]);
-  const [fetching, isLoading, error] = useFetching(async () => {
-    const response = await PostServices.getAll();
-    setPizzas(response);
-  });
-  React.useEffect(() => {
-    fetching();
-    window.scrollTo(0, 0);
-    // eslint-disable-next-line
-  }, []);
-
+  const {error, isLoading, pizzas} = React.useContext(PizzasContext)
+  console.log(pizzas)
   return (
     <>
       <div className="content__top">

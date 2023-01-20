@@ -3,9 +3,10 @@ import React from "react"
 export const useFetching = (callback) => {
     const [isLoading, setIsLoading] = React.useState(true)
     const [error, setError] = React.useState('')
-    async function fetching () {
+    async function fetching (sort,categ) {
         try {
-           await callback()
+            setIsLoading(true)
+           await callback(sort,categ)
         }
         catch (e) {
             setError(e.message)
