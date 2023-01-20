@@ -9,7 +9,8 @@ export const MyInput = () => {
       <input onChange={e=>setInptutValue(e.target.value)}
       value={inputValue}
        type={s.text} placeholder="Поиск пиццы ..." />
-      <div className={s.search}></div>
+      <div onClick={()=>setInptutValue('')}
+      className={s.search}></div>
     </div>
   );
 };

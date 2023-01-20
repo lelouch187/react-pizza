@@ -31,7 +31,7 @@ body {
   &__items {
     display: grid; 
     grid-template-columns: 1fr 1fr 1fr 1fr; 
-    grid-template-rows: 1fr 1fr; 
+    grid-template-rows: auto; 
     justify-items: center;
     @media (max-width: 1400px) {
       grid-template-columns: 1fr 1fr 1fr; 

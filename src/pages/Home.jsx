@@ -5,12 +5,13 @@ import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import { PizzasContext } from '../context';
+import { Pagination } from '../components/Pagination';
 
 
 
 export const Home = () => {
-  const {error, isLoading, pizzas} = React.useContext(PizzasContext)
-  console.log(pizzas)
+  const {error, isLoading, sortedPizzas} = React.useContext(PizzasContext)
+
   return (
     <>
       <div className="content__top">
@@ -25,10 +26,11 @@ export const Home = () => {
           ? [...new Array(6)].map((_, i) => {
               return <Skeleton key={i} />;
             })
-          : pizzas.map((pizzaObj) => {
+          : sortedPizzas.map((pizzaObj) => {
               return <PizzaBlock key={pizzaObj.id} {...pizzaObj} />;
             })}
       </div>
+      <Pagination />
     </>
   );
 };

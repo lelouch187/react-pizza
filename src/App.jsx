@@ -7,13 +7,13 @@ import { AppRouter } from './components/AppRouter';
 import { PizzasContext } from './context';
 
 function App() {
-  const {fetching, isActive, sortCategories, activeCategories} = React.useContext(PizzasContext)
+  const {fetching, isActive, sortCategories, activeCategories,currentPage} = React.useContext(PizzasContext)
 
   React.useEffect(() => {
-    fetching(sortCategories[activeCategories].value,isActive);
+    fetching(sortCategories[activeCategories].value,isActive,currentPage);
     window.scrollTo(0, 0);
     // eslint-disable-next-line
-  }, [isActive, activeCategories]);
+  }, [isActive, activeCategories,currentPage]);
 
   return (
     <div className="wrapper">
