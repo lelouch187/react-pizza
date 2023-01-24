@@ -1,16 +1,18 @@
 import React from 'react';
-import { PizzasContext } from '../context';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeActiveCategories } from '../redux/slice/filterSlice';
 
 const Categories = () => {
   const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
-  const { setIsActive, isActive} = React.useContext(PizzasContext)
+  const dispatch = useDispatch()
+  const activeCategories = useSelector(state=>state.filter.activeCategories)
   return (
     <div className="categories">
       <ul>
         {categories.map((item,index)=>{
           return <li key={item}
-          onClick={()=>setIsActive(index)} 
-          className={isActive===index?'active':''}>{item}</li>
+          onClick={()=>dispatch(changeActiveCategories(index))} 
+          className={activeCategories===index?'active':''}>{item}</li>
         })}
       </ul>
     </div>

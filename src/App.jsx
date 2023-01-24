@@ -5,15 +5,17 @@ import './scss/app.scss';
 import Header from './components/Header';
 import { AppRouter } from './components/AppRouter';
 import { PizzasContext } from './context';
+import { useSelector } from 'react-redux';
 
 function App() {
-  const {fetching, isActive, sortCategories, activeCategories,currentPage} = React.useContext(PizzasContext)
-
+  const {fetching, currentPage} = React.useContext(PizzasContext)
+  const {activeSort, sortCategories} = useSelector(state=>state.filter.sort)
+  const activeCategories = useSelector(state=>state.filter.activeCategories)
   React.useEffect(() => {
-    fetching(sortCategories[activeCategories].value,isActive,currentPage);
+    fetching(sortCategories[activeSort].value,activeCategories,currentPage);
     window.scrollTo(0, 0);
     // eslint-disable-next-line
-  }, [isActive, activeCategories,currentPage]);
+  }, [activeCategories, activeSort,currentPage]);
 
   return (
     <div className="wrapper">

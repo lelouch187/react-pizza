@@ -1,19 +1,20 @@
 import React from 'react';
-import { PizzasContext } from '../context';
+import { useDispatch, useSelector } from 'react-redux';
+import {changeActiveSort, changeVisiblePopup} from '../redux/slice/filterSlice'
 
 const Sort = () => {
-  const [visible, setVisible] = React.useState(false);
-  const { sortCategories, activeCategories, setActiveCategories} = React.useContext(PizzasContext)
+  const dispatch = useDispatch()
+  const {activeSort, sortCategories, visiblePopup} = useSelector(state=>state.filter.sort)
 
   const onChangeCategories = (index) => {
-    setActiveCategories(index);
-    setVisible(false);
+    dispatch(changeActiveSort(index));
+    dispatch(changeVisiblePopup(false));
   };
   return (
     <div className="sort">
       <div className="sort__label">
         <svg
-          style={{ transform: `rotate(${visible ? '0' : '180deg'})` }}
+          style={{ transform: `rotate(${visiblePopup ? '0' : '180deg'})` }}
           width="10"
           height="6"
           viewBox="0 0 10 6"
@@ -24,17 +25,17 @@ const Sort = () => {
             fill="#2C2C2C"></path>
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={()=>setVisible(!visible)}
-        >{sortCategories[activeCategories].name}</span>
+        <span onClick={()=>dispatch(changeVisiblePopup(!visiblePopup))}
+        >{sortCategories[activeSort].name}</span>
       </div>
-      {visible && (
+      {visiblePopup && (
         <div className="sort__popup">
           <ul>
             {
               sortCategories.map((categories,i)=>{
               return <li onClick={()=>onChangeCategories(i)}
               key={categories.name}
-              className={activeCategories===i?"active":''}>{categories.name}</li>
+              className={activeSort===i?"active":''}>{categories.name}</li>
               })
             }
           </ul>

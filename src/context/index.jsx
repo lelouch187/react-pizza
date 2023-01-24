@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { PostServices } from '../API/PostServices';
 import { useFetching } from '../hooks/useFetching';
 
@@ -10,20 +11,10 @@ export const CreateContext = ({ children }) => {
     const response = await PostServices.getAll(sort, categ, title);
     setPizzas(response);
   });
-
-  const [isActive, setIsActive] = React.useState(0);
-
-  const [activeCategories, setActiveCategories] = React.useState(0);
-  const sortCategories = [
-    { name: 'популярности', value: 'rating' },
-    { name: 'цене', value: 'price' },
-    { name: 'алфавиту', value: 'title' },
-  ];
-
-  const [inputValue, setInptutValue] = React.useState('');
+const search = useSelector(state=>state.filter.search)
 
   const sortedPizzas = pizzas.filter((pizza) =>
-    pizza.title.toLowerCase().includes(inputValue.toLowerCase()),
+    pizza.title.toLowerCase().includes(search.toLowerCase()),
   );
 
   const pages = [1,2,3]
@@ -32,18 +23,11 @@ export const CreateContext = ({ children }) => {
   return (
     <PizzasContext.Provider
       value={{
-        inputValue,
-        setInptutValue,
         sortedPizzas,
         setPizzas,
         fetching,
         isLoading,
         error,
-        isActive,
-        setActiveCategories,
-        setIsActive,
-        activeCategories,
-        sortCategories,
         pages,currentPage, setCurrentPage,
       }}>
       {children}
