@@ -11,14 +11,18 @@ export const CreateContext = ({ children }) => {
     const response = await PostServices.getAll(sort, categ, title);
     setPizzas(response);
   });
-const search = useSelector(state=>state.filter.search)
+  const search = useSelector((state) => state.filter.search);
+  const defferedSearch = React.useDeferredValue(search)
 
-  const sortedPizzas = pizzas.filter((pizza) =>
-    pizza.title.toLowerCase().includes(search.toLowerCase()),
-  );
+  const sortedPizzas =React.useMemo(()=>{
+    return pizzas.filter((pizza) =>
+    pizza.title.toLowerCase().includes(defferedSearch.toLowerCase()))
 
-  const pages = [1,2,3]
-  const [currentPage, setCurrentPage] = React.useState(1)
+  },[defferedSearch,pizzas]) 
+
+
+  const pages = [1, 2, 3];
+  const [currentPage, setCurrentPage] = React.useState(1);
 
   return (
     <PizzasContext.Provider
@@ -28,7 +32,9 @@ const search = useSelector(state=>state.filter.search)
         fetching,
         isLoading,
         error,
-        pages,currentPage, setCurrentPage,
+        pages,
+        currentPage,
+        setCurrentPage,
       }}>
       {children}
     </PizzasContext.Provider>
