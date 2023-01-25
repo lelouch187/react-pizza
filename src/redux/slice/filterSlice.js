@@ -12,6 +12,7 @@ const initialState = {
   },
   activeCategories: 0,
   search: '',
+  currentPage: 1,
 };
 
 const filterSlice = createSlice({
@@ -30,9 +31,17 @@ const filterSlice = createSlice({
     onChangeInput: (state, { payload }) => {
       state.search = payload;
     },
+    setCurrentPage: (state, { payload }) => {
+      state.currentPage = payload;
+    },
   },
 });
-export const { changeActiveCategories, changeActiveSort, onChangeInput, changeVisiblePopup } =
-  filterSlice.actions;
+export const {
+  changeActiveCategories,
+  changeActiveSort,
+  onChangeInput,
+  changeVisiblePopup,
+  setCurrentPage,
+} = filterSlice.actions;
 
 export default filterSlice.reducer;

@@ -8,8 +8,8 @@ import { PizzasContext } from './context';
 import { useSelector } from 'react-redux';
 
 function App() {
-  const {fetching, currentPage} = React.useContext(PizzasContext)
-  const {activeSort, sortCategories} = useSelector(state=>state.filter.sort)
+  const {fetching} = React.useContext(PizzasContext)
+  const {sort:{activeSort, sortCategories}, currentPage} = useSelector(state=>state.filter)
   const activeCategories = useSelector(state=>state.filter.activeCategories)
   React.useEffect(() => {
     fetching(sortCategories[activeSort].value,activeCategories,currentPage);

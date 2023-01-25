@@ -21,7 +21,7 @@ export const CreateContext = ({ children }) => {
   },[defferedSearch,pizzas]) 
 
 
-  const pages = [1, 2, 3];
+  ;
   const [currentPage, setCurrentPage] = React.useState(1);
 
   return (
@@ -32,7 +32,6 @@ export const CreateContext = ({ children }) => {
         fetching,
         isLoading,
         error,
-        pages,
         currentPage,
         setCurrentPage,
       }}>
