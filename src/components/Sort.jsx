@@ -5,13 +5,26 @@ import {changeActiveSort, changeVisiblePopup} from '../redux/slice/filterSlice'
 const Sort = () => {
   const dispatch = useDispatch()
   const {activeSort, sortCategories, visiblePopup} = useSelector(state=>state.filter.sort)
+  const popupRef = React.useRef()
 
   const onChangeCategories = (index) => {
     dispatch(changeActiveSort(index));
     dispatch(changeVisiblePopup(false));
   };
+  const hidePopup = (e) => {
+    if(!e.path.includes(popupRef.current)) {
+      dispatch(changeVisiblePopup(false))
+    }
+  }
+  React.useEffect(()=>{
+    document.addEventListener('click',hidePopup)
+    return () => {
+      document.removeEventListener('click',hidePopup)
+    }
+  },[])
   return (
-    <div className="sort">
+    <div ref={popupRef}
+     className="sort">
       <div className="sort__label">
         <svg
           style={{ transform: `rotate(${visiblePopup ? '0' : '180deg'})` }}
