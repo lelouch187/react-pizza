@@ -1,16 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { PostServices } from '../API/PostServices';
-import { useFetching } from '../hooks/useFetching';
+
 
 export const PizzasContext = React.createContext();
 
 export const CreateContext = ({ children }) => {
-  const [pizzas, setPizzas] = React.useState([]);
-  const [fetching, isLoading, error] = useFetching(async (sort, categ, title) => {
-    const response = await PostServices.getAll(sort, categ, title);
-    setPizzas(response);
-  });
+
+  const {pizzas, status} = useSelector(state=>state.pizzas)
   const search = useSelector((state) => state.filter.search);
   const defferedSearch = React.useDeferredValue(search)
 
@@ -28,10 +24,7 @@ export const CreateContext = ({ children }) => {
     <PizzasContext.Provider
       value={{
         sortedPizzas,
-        setPizzas,
-        fetching,
-        isLoading,
-        error,
+        status,
         currentPage,
         setCurrentPage,
       }}>

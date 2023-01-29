@@ -4,15 +4,16 @@ import './scss/app.scss';
 
 import Header from './components/Header';
 import { AppRouter } from './components/AppRouter';
-import { PizzasContext } from './context';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPizzas } from './redux/slice/pizzaSlice';
 
 function App() {
-  const {fetching} = React.useContext(PizzasContext)
+  const dispatch = useDispatch()
   const {sort:{activeSort, sortCategories}, currentPage} = useSelector(state=>state.filter)
   const activeCategories = useSelector(state=>state.filter.activeCategories)
   React.useEffect(() => {
-    fetching(sortCategories[activeSort].value,activeCategories,currentPage);
+    //fetching(sortCategories[activeSort].value,activeCategories,currentPage);
+    dispatch(fetchPizzas(sortCategories[activeSort].value,activeCategories,currentPage))
     window.scrollTo(0, 0);
     // eslint-disable-next-line
   }, [activeCategories, activeSort,currentPage]);

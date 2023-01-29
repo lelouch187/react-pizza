@@ -20,7 +20,7 @@ const Sort = () => {
     document.addEventListener('click',hidePopup)
     return () => {
       document.removeEventListener('click',hidePopup)
-    }
+    }//eslint-disable-next-line
   },[])
   return (
     <div ref={popupRef}

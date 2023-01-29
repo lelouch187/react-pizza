@@ -10,7 +10,7 @@ import { Pagination } from '../components/Pagination';
 
 
 export const Home = () => {
-  const {error, isLoading, sortedPizzas} = React.useContext(PizzasContext)
+  const {status, sortedPizzas} = React.useContext(PizzasContext)
 
   return (
     <>
@@ -20,9 +20,9 @@ export const Home = () => {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
-        {error
+        {status==='error'
           ? 'Что-то пошло не так ...'
-          : isLoading
+          : status==='pending'
           ? [...new Array(6)].map((_, i) => {
               return <Skeleton key={i} />;
             })
