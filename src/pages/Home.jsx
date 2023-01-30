@@ -4,13 +4,23 @@ import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
-import { PizzasContext } from '../context';
 import { Pagination } from '../components/Pagination';
+import { useSelector } from 'react-redux';
+import { selectPizzasData } from '../redux/slice/pizzaSlice';
+import { selectSearch } from '../redux/slice/filterSlice';
 
 
 
 export const Home = () => {
-  const {status, sortedPizzas} = React.useContext(PizzasContext)
+  const {pizzas, status} = useSelector(selectPizzasData)
+  const search = useSelector(selectSearch);
+  const defferedSearch = React.useDeferredValue(search)
+
+  const sortedPizzas =React.useMemo(()=>{
+    return pizzas.filter((pizza) =>
+    pizza.title.toLowerCase().includes(defferedSearch.toLowerCase()))
+
+  },[defferedSearch,pizzas]) 
 
   return (
     <>

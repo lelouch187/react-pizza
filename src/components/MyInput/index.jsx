@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { onChangeInput } from '../../redux/slice/filterSlice';
+import { onChangeInput, selectSearch } from '../../redux/slice/filterSlice';
 
 
 import s from './MyInput.module.scss';
 
 export const MyInput = () => {
-    const search = useSelector(state=>state.filter.search)
+    const search = useSelector(selectSearch)
     const dispatch = useDispatch()
 
     

@@ -3,8 +3,8 @@ const { PostServices } = require('../../API/PostServices');
 
 export const fetchPizzas = createAsyncThunk(
   'users/fetchPizzas',
-  async (sort, categ, currentPage) => {
-    const data = await PostServices.getAll(sort, categ, currentPage);
+  async (args) => {
+    const data = await PostServices.getAll(...args);
     return data;
   },
 );
@@ -32,4 +32,5 @@ const PizzasSlice = createSlice({
   },
 });
 
+export const selectPizzasData = state=>state.pizzas
 export default PizzasSlice.reducer;

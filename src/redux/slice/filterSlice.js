@@ -44,4 +44,9 @@ export const {
   setCurrentPage,
 } = filterSlice.actions;
 
+export const selectFilter = state=>state.filter
+export const selectActiveCategories = state=>state.filter.activeCategories
+export const selectSort = state=>state.filter.sort
+export const selectcurrentPage = state=>state.filter.currentPage
+export const selectSearch = state=>state.filter.search
 export default filterSlice.reducer;

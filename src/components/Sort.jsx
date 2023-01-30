@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {changeActiveSort, changeVisiblePopup} from '../redux/slice/filterSlice'
+import {changeActiveSort, changeVisiblePopup, selectSort} from '../redux/slice/filterSlice'
 
 const Sort = () => {
   const dispatch = useDispatch()
-  const {activeSort, sortCategories, visiblePopup} = useSelector(state=>state.filter.sort)
+  const {activeSort, sortCategories, visiblePopup} = useSelector(selectSort)
   const popupRef = React.useRef()
 
   const onChangeCategories = (index) => {

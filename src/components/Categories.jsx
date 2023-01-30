@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeActiveCategories } from '../redux/slice/filterSlice';
+import { changeActiveCategories, selectActiveCategories } from '../redux/slice/filterSlice';
 
 const Categories = () => {
   const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
   const dispatch = useDispatch()
-  const activeCategories = useSelector(state=>state.filter.activeCategories)
+  const activeCategories = useSelector(selectActiveCategories)
   return (
     <div className="categories">
       <ul>
