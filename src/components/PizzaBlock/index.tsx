@@ -2,7 +2,16 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, selectItemById } from '../../redux/slice/cartSlice';
 
-const PizzaBlock = ({ id,imageUrl, title, price, types, sizes }) => {
+type PizzaProps = {
+  id:string;
+  imageUrl:string; 
+  title: string; 
+  price: number; 
+  types: number[]; 
+  sizes: number[];
+}
+
+const PizzaBlock:React.FC<PizzaProps> = ({ id,imageUrl, title, price, types, sizes }) => {
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
   const typeNames = ['тонкое', 'традиционное'];

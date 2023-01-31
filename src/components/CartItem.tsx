@@ -1,7 +1,11 @@
 import { useDispatch } from "react-redux"
 import { countMinus, countPlus, deleteItem } from "../redux/slice/cartSlice"
 
-export const CartItem = ({item}) => {
+type CartItemProps = {
+  item:any
+}
+
+export const CartItem:React.FC<CartItemProps> = ({item}) => {
     const dispatch = useDispatch()
   return (
     <div className="cart__item">

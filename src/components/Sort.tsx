@@ -2,16 +2,16 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {changeActiveSort, changeVisiblePopup, selectSort} from '../redux/slice/filterSlice'
 
-const Sort = () => {
+const Sort:React.FC = () => {
   const dispatch = useDispatch()
   const {activeSort, sortCategories, visiblePopup} = useSelector(selectSort)
-  const popupRef = React.useRef()
+  const popupRef = React.useRef<HTMLDivElement>(null)
 
-  const onChangeCategories = (index) => {
+  const onChangeCategories = (index:number) => {
     dispatch(changeActiveSort(index));
     dispatch(changeVisiblePopup(false));
   };
-  const hidePopup = (e) => {
+  const hidePopup = (e:any) => {
     if(!e.path.includes(popupRef.current)) {
       dispatch(changeVisiblePopup(false))
     }
@@ -45,7 +45,7 @@ const Sort = () => {
         <div className="sort__popup">
           <ul>
             {
-              sortCategories.map((categories,i)=>{
+              sortCategories.map((categories:any,i:number)=>{
               return <li onClick={()=>onChangeCategories(i)}
               key={categories.name}
               className={activeSort===i?"active":''}>{categories.name}</li>

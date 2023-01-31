@@ -11,13 +11,13 @@ import { selectSearch } from '../redux/slice/filterSlice';
 
 
 
-export const Home = () => {
+export const Home:React.FC = () => {
   const {pizzas, status} = useSelector(selectPizzasData)
   const search = useSelector(selectSearch);
   const defferedSearch = React.useDeferredValue(search)
 
   const sortedPizzas =React.useMemo(()=>{
-    return pizzas.filter((pizza) =>
+    return pizzas.filter((pizza:any) =>
     pizza.title.toLowerCase().includes(defferedSearch.toLowerCase()))
 
   },[defferedSearch,pizzas]) 
@@ -36,7 +36,7 @@ export const Home = () => {
           ? [...new Array(6)].map((_, i) => {
               return <Skeleton key={i} />;
             })
-          : sortedPizzas.map((pizzaObj) => {
+          : sortedPizzas.map((pizzaObj:any) => {
               return <PizzaBlock key={pizzaObj.id} {...pizzaObj} />;
             })}
       </div>

@@ -5,7 +5,7 @@ import { onChangeInput, selectSearch } from '../../redux/slice/filterSlice';
 
 import s from './MyInput.module.scss';
 
-export const MyInput = () => {
+export const MyInput: React.FC = () => {
     const search = useSelector(selectSearch)
     const dispatch = useDispatch()
 

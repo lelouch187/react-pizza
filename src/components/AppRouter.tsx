@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom"
 
 import  {MyRoutes} from '../router'
 
-export const AppRouter = () => {
+export const AppRouter:React.FC = () => {
   return (
    <Routes>
     {MyRoutes.map(route=> {

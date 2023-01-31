@@ -8,12 +8,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchPizzas } from './redux/slice/pizzaSlice';
 import { selectActiveCategories, selectFilter } from './redux/slice/filterSlice';
 
-function App() {
+const App:React.FC = () => {
   const dispatch = useDispatch()
   const {sort:{activeSort, sortCategories}, currentPage} = useSelector(selectFilter)
   const activeCategories = useSelector(selectActiveCategories)
 
   React.useEffect(() => {
+    // @ts-ignore
     dispatch(fetchPizzas([sortCategories[activeSort].value,activeCategories,currentPage]))
     window.scrollTo(0, 0);
     // eslint-disable-next-line
