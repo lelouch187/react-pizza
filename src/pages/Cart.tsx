@@ -1,14 +1,14 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { CartEmpty } from '../components/CartEmpty';
 import { CartItem } from '../components/CartItem';
-import { clearCart } from '../redux/slice/cartSlice';
+import { CartPizza, clearCart, selectCart } from '../redux/slice/cartSlice';
+import { useAppDispatch } from '../redux/store';
 
 export const Cart:React.FC = () => {
-  // @ts-ignore
-  const { items, totalPrice } = useSelector(state => state.cart);
-  const itemsInCart = items.reduce((sum:number,item:any)=>sum+item.count,0)
-  const dispatch = useDispatch()
+  const { items, totalPrice } = useSelector(selectCart);
+  const itemsInCart = items.reduce((sum:number,item:CartPizza)=>sum+item.count,0)
+  const dispatch = useAppDispatch()
   if (!items.length) {
     return <CartEmpty />;
   }
@@ -81,7 +81,7 @@ export const Cart:React.FC = () => {
         </div>
       </div>
       <div className="content">
-        {items.map((item:any) => {
+        {items.map((item:CartPizza) => {
           return <CartItem key={item.id} item={item} />;
         })}
       </div>

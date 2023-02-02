@@ -1,6 +1,7 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { addItem, selectItemById } from '../../redux/slice/cartSlice';
+import { useAppDispatch } from '../../redux/store';
 
 type PizzaProps = {
   id:string;
@@ -10,13 +11,13 @@ type PizzaProps = {
   types: number[]; 
   sizes: number[];
 }
+const typeNames = ['тонкое', 'традиционное'];
 
 const PizzaBlock:React.FC<PizzaProps> = ({ id,imageUrl, title, price, types, sizes }) => {
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
-  const typeNames = ['тонкое', 'традиционное'];
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const itemInCart = useSelector(selectItemById(id))
 
   const addPizzaInCart = () => {
@@ -42,7 +43,7 @@ const PizzaBlock:React.FC<PizzaProps> = ({ id,imageUrl, title, price, types, siz
             return (
               <li
                 key={typeId}
-                onClick={() => setActiveType(typeId)}
+                onClick={(e:React.MouseEvent<HTMLLIElement>) => setActiveType(typeId)}
                 className={activeType === typeId ? 'active' : ''}>
                 {typeNames[typeId]}
               </li>

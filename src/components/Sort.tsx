@@ -1,9 +1,10 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {changeActiveSort, changeVisiblePopup, selectSort} from '../redux/slice/filterSlice'
+import { useAppDispatch } from '../redux/store';
 
 const Sort:React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const {activeSort, sortCategories, visiblePopup} = useSelector(selectSort)
   const popupRef = React.useRef<HTMLDivElement>(null)
 
@@ -11,8 +12,8 @@ const Sort:React.FC = () => {
     dispatch(changeActiveSort(index));
     dispatch(changeVisiblePopup(false));
   };
-  const hidePopup = (e:any) => {
-    if(!e.path.includes(popupRef.current)) {
+  const hidePopup = (e:Event) => {
+    if(popupRef.current&&!e.composedPath().includes(popupRef.current)) {
       dispatch(changeVisiblePopup(false))
     }
   }
@@ -38,15 +39,15 @@ const Sort:React.FC = () => {
             fill="#2C2C2C"></path>
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={()=>dispatch(changeVisiblePopup(!visiblePopup))}
+        <span onClick={(e:React.MouseEvent<HTMLSpanElement>)=>dispatch(changeVisiblePopup(!visiblePopup))}
         >{sortCategories[activeSort].name}</span>
       </div>
       {visiblePopup && (
         <div className="sort__popup">
           <ul>
             {
-              sortCategories.map((categories:any,i:number)=>{
-              return <li onClick={()=>onChangeCategories(i)}
+              sortCategories.map((categories,i:number)=>{
+              return <li onClick={(e:React.MouseEvent<HTMLLIElement>)=>onChangeCategories(i)}
               key={categories.name}
               className={activeSort===i?"active":''}>{categories.name}</li>
               })

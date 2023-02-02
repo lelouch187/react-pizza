@@ -1,12 +1,12 @@
-import { useDispatch } from "react-redux"
-import { countMinus, countPlus, deleteItem } from "../redux/slice/cartSlice"
+import { countMinus, countPlus, deleteItem, CartPizza } from "../redux/slice/cartSlice"
+import { useAppDispatch } from "../redux/store"
 
 type CartItemProps = {
-  item:any
+  item:CartPizza;
 }
 
 export const CartItem:React.FC<CartItemProps> = ({item}) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
   return (
     <div className="cart__item">
     <div className="cart__item-img">
@@ -21,7 +21,7 @@ export const CartItem:React.FC<CartItemProps> = ({item}) => {
       <p>{item.type}, {item.size} см.</p>
     </div>
     <div className="cart__item-count">
-      <div onClick={()=>dispatch(countMinus(item))}
+      <div onClick={(e:React.MouseEvent<HTMLDivElement>)=>dispatch(countMinus(item))}
       className="button button--outline button--circle cart__item-count-minus">
         <svg
           width="10"
@@ -38,7 +38,7 @@ export const CartItem:React.FC<CartItemProps> = ({item}) => {
         </svg>
       </div>
       <b>{item.count}</b>
-      <div onClick={()=>dispatch(countPlus(item))}
+      <div onClick={(e:React.MouseEvent<HTMLDivElement>)=>dispatch(countPlus(item))}
        className="button button--outline button--circle cart__item-count-plus">
         <svg
           width="10"
@@ -58,7 +58,7 @@ export const CartItem:React.FC<CartItemProps> = ({item}) => {
     <div className="cart__item-price">
       <b>{item.price*item.count} ₽</b>
     </div>
-    <button onClick={()=>dispatch(deleteItem(item))}
+    <button onClick={(e:React.MouseEvent<HTMLButtonElement>)=>dispatch(deleteItem(item))}
      className="cart__item-remove">
       <div className="button button--outline button--circle">
         <svg
