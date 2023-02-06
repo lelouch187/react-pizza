@@ -1,8 +1,9 @@
-import { countMinus, countPlus, deleteItem, CartPizza } from "../redux/slice/cartSlice"
+import { ICartPizza } from "../@types/types";
+import { countMinus, countPlus, deleteItem } from "../redux/slice/cartSlice"
 import { useAppDispatch } from "../redux/store"
 
 type CartItemProps = {
-  item:CartPizza;
+  item:ICartPizza;
 }
 
 export const CartItem:React.FC<CartItemProps> = ({item}) => {

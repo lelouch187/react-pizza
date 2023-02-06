@@ -6,8 +6,9 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import { Pagination } from '../components/Pagination';
 import { useSelector } from 'react-redux';
-import { Pizza, selectPizzasData } from '../redux/slice/pizzaSlice';
+import { selectPizzasData } from '../redux/slice/pizzaSlice';
 import { selectSearch } from '../redux/slice/filterSlice';
+import { IPizza } from '../@types/types';
 
 
 
@@ -16,7 +17,7 @@ export const Home:React.FC = () => {
   const search = useSelector(selectSearch);
   const defferedSearch = React.useDeferredValue(search)
 
-  const sortedPizzas= pizzas.filter((pizza:Pizza) =>
+  const sortedPizzas= pizzas.filter((pizza:IPizza) =>
     pizza.title.toLowerCase().includes(defferedSearch.toLowerCase()))
 
   
@@ -35,7 +36,7 @@ export const Home:React.FC = () => {
           ? [...new Array(6)].map((_, i) => {
               return <Skeleton key={i} />;
             })
-          : sortedPizzas.map((pizzaObj:Pizza) => {
+          : sortedPizzas.map((pizzaObj:IPizza) => {
               return <PizzaBlock key={pizzaObj.id} {...pizzaObj} />;
             })}
       </div>

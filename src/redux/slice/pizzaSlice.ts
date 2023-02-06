@@ -1,17 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { IPizza } from '../../@types/types';
 import { PostServices } from '../../API/PostServices';
 import { RootState } from '../store';
 
-export type Pizza = {
-  id: string;
-  imageUrl: string;
-  title: string;
-  types: number[];
-  sizes: number[];
-  price: number;
-  category: number;
-  rating: number;
-};
+
 type PizzaArgs = [
   sort: string,
   categ: number,
@@ -23,12 +15,12 @@ enum PizzaStatus {
   ERROR = 'error',
 }
 export interface PizzaState {
-  pizzas: Pizza[];
+  pizzas: IPizza[];
   status: PizzaStatus;
 }
 
 export const fetchPizzas = createAsyncThunk('users/fetchPizzas', async (args: PizzaArgs) => {
-  const data = (await PostServices.getAll(...args)) as Pizza[];
+  const data = (await PostServices.getAll(...args)) as IPizza[];
   return data;
 });
 const initialState: PizzaState = {
