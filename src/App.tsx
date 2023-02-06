@@ -4,12 +4,13 @@ import './scss/app.scss';
 
 import Header from './components/Header';
 import { AppRouter } from './components/AppRouter';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { fetchPizzas } from './redux/slice/pizzaSlice';
 import { selectActiveCategories, selectFilter } from './redux/slice/filterSlice';
+import { useAppDispatch } from './redux/store';
 
 const App:React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const {sort:{activeSort, sortCategories}, currentPage} = useSelector(selectFilter)
   const activeCategories = useSelector(selectActiveCategories)
 

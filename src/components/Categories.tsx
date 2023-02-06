@@ -1,10 +1,11 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { changeActiveCategories, selectActiveCategories } from '../redux/slice/filterSlice';
 import { useAppDispatch } from '../redux/store';
 
 const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
-const Categories:React.FC = () => {
+const Categories:React.FC = React.memo(() => {
   const dispatch = useAppDispatch()
   const activeCategories = useSelector(selectActiveCategories)
   return (
@@ -18,6 +19,6 @@ const Categories:React.FC = () => {
       </ul>
     </div>
   );
-};
+})
 
 export default Categories;

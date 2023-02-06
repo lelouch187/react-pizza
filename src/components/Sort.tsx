@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import {changeActiveSort, changeVisiblePopup, selectSort} from '../redux/slice/filterSlice'
 import { useAppDispatch } from '../redux/store';
 
-const Sort:React.FC = () => {
+const Sort:React.FC = React.memo(() => {
   const dispatch = useAppDispatch()
   const {activeSort, sortCategories, visiblePopup} = useSelector(selectSort)
   const popupRef = React.useRef<HTMLDivElement>(null)
@@ -57,6 +57,6 @@ const Sort:React.FC = () => {
       )}
     </div>
   );
-};
+})
 
 export default Sort;

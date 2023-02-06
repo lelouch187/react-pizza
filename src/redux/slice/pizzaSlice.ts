@@ -3,7 +3,7 @@ import { PostServices } from '../../API/PostServices';
 import { RootState } from '../store';
 
 export type Pizza = {
-  id: number;
+  id: string;
   imageUrl: string;
   title: string;
   types: number[];
@@ -12,11 +12,11 @@ export type Pizza = {
   category: number;
   rating: number;
 };
-type PizzaArgs = {
-  sort: string;
-  categ: number;
-  currentPage: number;
-};
+type PizzaArgs = [
+  sort: string,
+  categ: number,
+  currentPage: number,
+];
 enum PizzaStatus {
   PENDING = 'pending',
   FULFILED = 'fulfilled',
@@ -28,8 +28,7 @@ export interface PizzaState {
 }
 
 export const fetchPizzas = createAsyncThunk('users/fetchPizzas', async (args: PizzaArgs) => {
-  const { sort, categ, currentPage } = args;
-  const data = (await PostServices.getAll(sort, categ, currentPage)) as Pizza[];
+  const data = (await PostServices.getAll(...args)) as Pizza[];
   return data;
 });
 const initialState: PizzaState = {

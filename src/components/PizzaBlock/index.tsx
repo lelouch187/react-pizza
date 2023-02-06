@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { addItem, selectItemById } from '../../redux/slice/cartSlice';
 import { useAppDispatch } from '../../redux/store';
 
-type PizzaProps = {
+export type PizzaProps = {
   id:string;
   imageUrl:string; 
   title: string; 
